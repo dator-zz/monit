@@ -1,64 +1,65 @@
 <html>
 <head>
-	<title>Monit</title>
-	<script type="text/javascript" src="raphael.2.1.0.min.js"></script>
-	<script type="text/javascript" src="justgage.1.0.1.min.js"></script>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-	<style type="text/css">
-	#g1, #g2, #g3{
+    <title>Monit</title>
+    <script type="text/javascript" src="raphael.2.1.0.min.js"></script>
+    <script type="text/javascript" src="justgage.1.0.1.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <style type="text/css">
+    #g1, #g2, #g3{
         width:300px; height:220px;
         display: inline-block;
         margin: 1em;
-      }
-	</style>
-	<script type="text/javascript">
-      var g1, g2, g3;
+    }
+    </style>
+    <script type="text/javascript">
+    var g1, g2, g3;
 
-      function init(){
-      	$.get('monit.php', function(data) {
-			g1 = new JustGage({
-	          id: "g1", 
-	          value: data.memory.used, 
-	          min: 0,
-	          max: 100,
-	          title: "%Memoire",
-	          label: ""
-	        });
-	        g2 = new JustGage({
-	          id: "g2", 
-	          value: data.cpu.used, 
-	          min: 0,
-	          max: 100,
-	          title: "%Cpu",
-	          label: ""
-	        });
-	        g3 = new JustGage({
-	          id: "g3", 
-	          value: data.swap.used, 
-	          min: 0,
-	          max: 100,
-	          title: "%Swap",
-	          label: ""
-	        });
-  		});
+        function init(){
+            $.get('monit.php', function(data) {
+                g1 = new JustGage({
+                    id: "g1", 
+                    value: data.memory.used, 
+                    min: 0,
+                    max: 100,
+                    title: "%Memoire",
+                    label: ""
+                });
+                g2 = new JustGage({
+                    id: "g2", 
+                    value: data.cpu.used, 
+                    min: 0,
+                    max: 100,
+                    title: "%Cpu",
+                    label: ""
+                });
+                g3 = new JustGage({
+                    id: "g3", 
+                    value: data.swap.used, 
+                    min: 0,
+                    max: 100,
+                    title: "%Swap",
+                    label: ""
+                });
+          });
       }
+
       function fetch(first) {
-  		$.get('monit.php', function(data) {
-  			g1.refresh(data.memory.used);
-  			g2.refresh(data.cpu.used);
-  			g3.refresh(data.swap.used);
-  		});
-  	  }
+        $.get('monit.php', function(data) {
+            g1.refresh(data.memory.used);
+            g2.refresh(data.cpu.used);
+            g3.refresh(data.swap.used);
+        });
+    }
 
-      $(function(){
-      	init();
+    $(function(){
+        init();
         setInterval('fetch()', 2000);
-      });
-	</script>
+    });
+    </script>
 </head>
 <body>
-	<div id="g1"></div>
-	<div id="g2"></div>
-	<div id="g3"></div>
+    <div id="g1"></div>
+    <div id="g2"></div>
+    <div id="g3"></div>
 </body>
 </html>
