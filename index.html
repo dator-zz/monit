@@ -14,36 +14,36 @@
     <script type="text/javascript">
     var g1, g2, g3;
 
-        function init(){
-            $.get('monit.php', function(data) {
-                g1 = new JustGage({
-                    id: "g1", 
-                    value: data.memory.used, 
-                    min: 0,
-                    max: 100,
-                    title: "%Memoire",
-                    label: ""
-                });
-                g2 = new JustGage({
-                    id: "g2", 
-                    value: data.cpu.used, 
-                    min: 0,
-                    max: 100,
-                    title: "%Cpu",
-                    label: ""
-                });
-                g3 = new JustGage({
-                    id: "g3", 
-                    value: data.swap.used, 
-                    min: 0,
-                    max: 100,
-                    title: "%Swap",
-                    label: ""
-                });
-          });
-      }
+    function init(){
+        $.get('monit.php', function(data) {
+            g1 = new JustGage({
+                id: "g1", 
+                value: data.memory.used, 
+                min: 0,
+                max: 100,
+                title: "%Memoire",
+                label: ""
+            });
+            g2 = new JustGage({
+                id: "g2", 
+                value: data.cpu.used, 
+                min: 0,
+                max: 100,
+                title: "%Cpu",
+                label: ""
+            });
+            g3 = new JustGage({
+                id: "g3", 
+                value: data.swap.used, 
+                min: 0,
+                max: 100,
+                title: "%Swap",
+                label: ""
+            });
+      });
+    }
 
-      function fetch(first) {
+    function fetch(first) {
         $.get('monit.php', function(data) {
             g1.refresh(data.memory.used);
             g2.refresh(data.cpu.used);
